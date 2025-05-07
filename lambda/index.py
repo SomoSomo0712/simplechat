@@ -8,12 +8,12 @@ import urllib.request # urllib.request をインポート
 
 
 # Lambda コンテキストからリージョンを抽出する関数
-# def extract_region_from_arn(arn):
-    # ARN 形式: arn:aws:lambda:region:account-id:function:function-name
-   #  match = re.search('arn:aws:lambda:([^:]+):', arn)
-    # if match:
-        # return match.group(1)
-    # return "us-east-1"  # デフォルト値
+#def extract_region_from_arn(arn):
+    #ARN 形式: arn:aws:lambda:region:account-id:function:function-name
+    #match = re.search('arn:aws:lambda:([^:]+):', arn)
+    #if match:
+        #return match.group(1)
+    #return "us-east-1"  # デフォルト値
 
 # グローバル変数としてクライアントを初期化（初期値）
 # bedrock_client = None
@@ -22,7 +22,7 @@ import urllib.request # urllib.request をインポート
 # MODEL_ID = os.environ.get("MODEL_ID", "us.amazon.nova-lite-v1:0")
 # Model_ID = os.environ.get("MODEL_ID","https://ba05-35-233-232-80.ngrok-free.app/generate")
 # ★ ここに Google Colab で取得した ngrok の公開URLを設定します ★
-COLAB_API_URL = "https://60e3-35-197-145-163.ngrok-free.app/generate"
+COLAB_API_URL = "https://6322-35-197-145-163.ngrok-free.app/generate"
 
 # URLが設定されていない場合のエラーチェック (念のため)
 #if not COLAB_API_URL or COLAB_API_URL == "https://ba05-35-233-232-80.ngrok-free.app/generate":
@@ -102,7 +102,12 @@ def lambda_handler(event, context):
                 "topP": 0.9
             }
         }
-        
+
+
+        data_to_send = json.dumps(payload).encode('utf-8') # 変数名を data_to_send など明確にしても良い
+
+ 
+
         print("Calling Bedrock invoke_model API with payload:", json.dumps(request_payload))
         
         # invoke_model APIを呼び出し
@@ -113,7 +118,7 @@ def lambda_handler(event, context):
        # )
         req = urllib.request.Request(
             COLAB_API_URL,
-            data=data,
+            data=data_to_send,
             headers={'Content-Type': 'application/json'}
             )
 
