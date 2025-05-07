@@ -20,27 +20,27 @@ import urllib.request # urllib.request をインポート
 
 # モデルID
 # MODEL_ID = os.environ.get("MODEL_ID", "us.amazon.nova-lite-v1:0")
-Model_ID = os.environ.get("MODEL_ID","https://ba05-35-233-232-80.ngrok-free.app/generate")
+# Model_ID = os.environ.get("MODEL_ID","https://ba05-35-233-232-80.ngrok-free.app/generate")
 # ★ ここに Google Colab で取得した ngrok の公開URLを設定します ★
-COLAB_API_URL = "https://ba05-35-233-232-80.ngrok-free.app/generate"
+COLAB_API_URL = "https://60e3-35-197-145-163.ngrok-free.app/generate"
 
 # URLが設定されていない場合のエラーチェック (念のため)
-if not COLAB_API_URL or COLAB_API_URL == "https://ba05-35-233-232-80.ngrok-free.app/generate":
-	print("致命的エラー: Colab APIのURLが lambda/index.py に設定されていません！")
+#if not COLAB_API_URL or COLAB_API_URL == "https://ba05-35-233-232-80.ngrok-free.app/generate":
+#	print("致命的エラー: Colab APIのURLが lambda/index.py に設定されていません！")
 
 def lambda_handler(event, context):
 # CORS Preflightリクエストへの対応 (OPTIONSメソッド)
     # API GatewayのProxy統合を使っている場合、ブラウザが事前にこのリクエストを送ることがある
-    if event.get('httpMethod') == 'OPTIONS':
-        return {
-            'statusCode': 200,
-            'headers': {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
-                "Access-Control-Allow-Methods": "OPTIONS,POST" # 許可するメソッド
-            },
-            'body': '' # OPTIONSリクエストに対するボディは空でOK
-        }
+#    if event.get('httpMethod') == 'OPTIONS':
+#        return {
+#            'statusCode': 200,
+#            'headers': {
+#                "Access-Control-Allow-Origin": "*",
+#                "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+#                "Access-Control-Allow-Methods": "OPTIONS,POST" # 許可するメソッド
+#            },
+#            'body': '' # OPTIONSリクエストに対するボディは空でOK
+#        }
 
     try:
 # --- Bedrockクライアントの初期化処理は不要なので削除 ---
@@ -65,7 +65,7 @@ def lambda_handler(event, context):
        conversation_history = body.get('conversationHistory', [])
         
         print("Processing message:", message)
-        print("Using model:", MODEL_ID)
+ #       print("Using model:", MODEL_ID)
         
         # 会話履歴を使用
         messages = conversation_history.copy()
