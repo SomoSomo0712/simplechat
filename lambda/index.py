@@ -79,7 +79,7 @@ def lambda_handler(event, context):
         # Nova Liteモデル用のリクエストペイロードを構築
         # 会話履歴を含める
        # bedrock_messages = []
-       Fast_API_messages = []
+        Fast_API_messages = []
         for msg in messages:
             if msg["role"] == "user":
                 Fast_API_messages.append({
