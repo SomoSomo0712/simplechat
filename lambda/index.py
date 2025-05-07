@@ -22,7 +22,7 @@ import urllib.request # urllib.request をインポート
 # MODEL_ID = os.environ.get("MODEL_ID", "us.amazon.nova-lite-v1:0")
 # Model_ID = os.environ.get("MODEL_ID","https://ba05-35-233-232-80.ngrok-free.app/generate")
 # ★ ここに Google Colab で取得した ngrok の公開URLを設定します ★
-COLAB_API_URL = "https://6322-35-197-145-163.ngrok-free.app/generate"
+COLAB_API_URL = "https://73ae-35-198-228-23.ngrok-free.app/generate"
 
 # URLが設定されていない場合のエラーチェック (念のため)
 #if not COLAB_API_URL or COLAB_API_URL == "https://ba05-35-233-232-80.ngrok-free.app/generate":
@@ -104,7 +104,7 @@ def lambda_handler(event, context):
         }
 
 
-        data_to_send = json.dumps(payload).encode('utf-8') # 変数名を data_to_send など明確にしても良い
+        data = json.dumps(payload).encode('utf-8') # 変数名を data_to_send など明確にしても良い
 
  
 
@@ -118,7 +118,7 @@ def lambda_handler(event, context):
        # )
         req = urllib.request.Request(
             COLAB_API_URL,
-            data=data_to_send,
+            data=data,
             headers={'Content-Type': 'application/json'}
             )
 
