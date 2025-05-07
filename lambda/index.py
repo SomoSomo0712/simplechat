@@ -78,7 +78,7 @@ def lambda_handler(event, context):
         
         # Nova Liteモデル用のリクエストペイロードを構築
         # 会話履歴を含める
-       # bedrock_messages = []
+        # bedrock_messages = []
         Fast_API_messages = []
         for msg in messages:
             if msg["role"] == "user":
@@ -127,7 +127,7 @@ def lambda_handler(event, context):
 
 
         # レスポンスを解析
-       response_body = json.loads(response['body'].read())
+        response_body = json.loads(response['body'].read())
        #print("Bedrock response:", json.dumps(response_body, default=str))
         print("Fast_API response", json.dumps(response_body, default-str))
 
