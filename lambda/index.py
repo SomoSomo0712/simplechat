@@ -111,15 +111,19 @@ def lambda_handler(event, context):
        #     body=json.dumps(request_payload),
        #     contentType="application/json"
        # )
-        
-        with  response = urlib.request.urlopen(
-                                url = COLAB_API_URL,
-                                                data = json.dumps(request_payload).encode('utf-8')
-                                                                headers = {"Content-Type" : "application/json"},
-                                                                                method = "POST"
-                                                                                                )
-           as response :
-                      the HttpStatus = respons.getcode()
+        req = urllib.request.Request(
+            COLAB_API_URL,
+            data=data,
+            headers={'Content-Type': 'application/json'}
+            )
+
+
+        with urllib.request.urlopen(req) as response:
+            response_body_bytes = response.read()
+            response_str = response_body_bytes.decode('utf-8')
+            response_data = json.loads(response_str)
+            print("FastAPI response:", json.dumps(response_data))
+
 
 
         # レスポンスを解析
